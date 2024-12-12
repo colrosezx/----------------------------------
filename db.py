@@ -39,7 +39,10 @@ async def create_table():
                 Url VARCHAR(1000),
                 Card_Price_With_Discount FLOAT,
                 Card_Price_Without_Discount FLOAT,
-                Quantity_Of_Goods INT
+                Quantity_Of_Goods INT,
+                BrandName VARCHAR(100),
+                Rating FLOAT,
+                Count_Feedbacks INT
             )
         ''')
         print('Table created successfully.')
@@ -52,7 +55,8 @@ async def create_table():
 
 async def insert_into_database(marketplace, product_url, product_article,
                                product_name, card_price_without_discount,
-                               card_price_with_discount, quantity_of_goods):
+                               card_price_with_discount, quantity_of_goods,
+                               brand_name, rating, count_feedbacks):
     try:
         connection = await asyncpg.connect(
             host=host,
@@ -70,14 +74,18 @@ async def insert_into_database(marketplace, product_url, product_article,
                 Url,
                 Card_Price_With_Discount,
                 Card_Price_Without_Discount,
-                Quantity_Of_Goods
+                Quantity_Of_Goods,
+                BrandName,
+                Rating,
+                Count_Feedbacks
             )
             VALUES (
-                $1, $2, $3, $4, $5, $6, $7
+                $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
             )
             """,
             product_article, marketplace, product_name, product_url,
-            card_price_with_discount, card_price_without_discount, quantity_of_goods
+            card_price_with_discount, card_price_without_discount, quantity_of_goods,
+            brand_name, rating, count_feedbacks
         )
 
         print('Object already downloaded to table')

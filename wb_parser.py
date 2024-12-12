@@ -27,11 +27,15 @@ async def get_info_about_cards(session, url):
             price_without_discount = product['sizes'][0]['price']['basic'] / 100
             quantity_of_goods = product['totalQuantity']
             marketplace = 'Wildberries'
+            brand_name = product['brand']
+            rating = product['supplierRating']
+            count_feedbacks = product['feedbacks']
+
 
             await insert_into_database(marketplace, product_url,
                                        product_article, product_name,
                                        price_without_discount, price_with_discount,
-                                       quantity_of_goods)
+                                       quantity_of_goods, brand_name, rating, count_feedbacks)
 
 async def main():
     num_pages = 3
