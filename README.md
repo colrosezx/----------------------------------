@@ -16,4 +16,6 @@
   - aiohttp
   - asynpg2 - PostgreSQL
   - json
+
+P.S. Значения в config.py поменять на свои
  
